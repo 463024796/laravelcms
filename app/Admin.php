@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class Admin extends Model {
-
+class Admin extends Model
+{
     public $table = "admin";
     public $timestamps = false;
 

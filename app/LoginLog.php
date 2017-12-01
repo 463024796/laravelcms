@@ -94,15 +94,12 @@ class LoginLog extends Model {
      * @return string 区域
      */
     private static function getCityByIp($ip) {
-        $url = "http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=" . $ip;
+        $url = "http://ip.taobao.com/service/getIpInfo.php?ip=" . $ip;
         $json = file_get_contents($url);
-        if ($json == -1) {
-            return '内网地址';
-        } else if ($json == -2) {
-            return 'ip地址有误';
-        } else {
-            $address = json_decode($json, true);
-            return $address['country'] . $address['province'] . $address['city'];
+        $addressInfo = json_decode($json, true);
+        if ($addressInfo['code']) {
+            return "ip地址有误";
         }
+        return $addressInfo['data']['country'] . $addressInfo['data']['region'] . $addressInfo['data']['city'];
     }
 }
